@@ -1,0 +1,9 @@
+{
+  "average_return": -895.3286257254686,
+  "success_rate": 1.0,
+  "average_steps_to_success": 93.86,
+  "average_time_to_success_sec": 4.6930000000000005,
+  "average_steps_to_done": 93.86,
+  "average_time_to_done_sec": 4.6930000000000005,
+  "episodes": 100
+}

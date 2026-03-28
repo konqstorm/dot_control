@@ -1,0 +1,42 @@
+env:
+  dt: 0.05
+  u_max: 5.0
+  x_init_max: 10.0
+  v_init_max: 5.0
+  x_limit: 20.0
+  goal_pos_tol: 0.05
+  goal_vel_tol: 0.05
+  goal_hold_steps: 10
+  max_steps: 500
+reward:
+  alpha: 1.0
+  beta: 0.1
+  gamma: 0.001
+sac:
+  gamma: 0.99
+  tau: 0.001          # Было 0.005. Делаем обновления target-сети более плавными (защита от скачков Q-values).
+  actor_lr: 0.0001    # Было 0.0003. Снижаем скорость обучения для стабильности.
+  critic_lr: 0.0001   # Было 0.0003.
+  alpha_lr: 0.0001    # Было 0.0003.
+  hidden_sizes: [256, 256]
+  target_entropy: -1.0
+  batch_size: 256
+  replay_size: 100000
+  start_steps: 5000
+  update_after: 1000
+  update_every: 50    # Обновляем сеть не каждый шаг, а раз в 50 шагов...
+  updates_per_step: 50 # ...но делаем сразу 50 батч-обновлений. Это классический трюк для симуляций физики.
+  init_alpha: 0.2
+train:
+  episodes: 300
+  log_every: 10
+  seed: 42
+paths:
+  checkpoint: "artifacts/overall_best_sac_point_best_ep250_sr1.00_st95.pt"
+  curve_plot: "artifacts/learning_curve.png"
+  animation: "artifacts/rollout.gif"
+  metrics: "artifacts/metrics.json"
+eval:
+  episodes: 100
+run:
+  seed: 123
